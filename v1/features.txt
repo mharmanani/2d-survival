@@ -1,0 +1,107 @@
+========================  
+BASIC FEATURES
+======================== 
+0) Keyboard movement
+   Done by: harmanan
+   Explanation: Added a player actor. Moves around with WASD.
+
+1) Health/armor on display
+   Done by: harmanan
+   Explanation: Displays health and armor above the player. 
+
+2) Mouse+click to use melee weapon
+   Done by: harmanan
+   Explanation: Can use the mouse to select obstacles/enemies to attack.
+   If they are too far away, no damage is dealt.
+
+3) Ammunition runs out
+   Done by: harmanan
+
+4) Ammunition on display
+   Done by: harmanan
+   Explanation: Displays ammunition under the player. 
+   Active only if a gun/weapon is equipped.
+
+5) Ammunition can be picked up
+   Done by: harmanan
+   Explanation: The player can pick up ammunition as loot from crates.
+
+6) Can fire weapons
+   Done by: harmanan
+   Explanation: Can shoot bullets from weapons to deal damage.
+   Projectiles are on display.
+
+7) Obstacles
+   Done by: harmanan
+   Explanation: Every round, obstacles spawn on the map. They may contain loot (crates)
+   or pose a hindrace to the player (tombstones.
+
+8) AI opponents
+   Done by: harmanan
+   Explanation: Zombies wander the map aimlessly looking to inflict damage on the player.
+
+9) Multiple projectiles fired from player weapon at the same time
+   Done by: harmanan
+   Explanation: Assault rifles can shoot repeatedly, shotguns fire multiple projectiles at the same time, etc...
+
+10) Projectiles impact opponents and other obstacles in map
+   Done by: harmanan
+   Explanation: Bullets destroy crates/tombstones and hurt enemies.
+
+========================  
+ADDITIONAL FEATURES
+======================== 
+
+11) Different actors have different velocities
+   Done by: harmanan
+   Explanation: Skeletons are fast, Zombies are slower, Demons are the slowest.
+
+12) Obstacles can be destroyed
+   Done by: harmanan
+
+13) Interesting items
+   Done by: harmanan
+   Explanation: Lightsabers, laser guns, nukes, armor, medkits, etc...
+
+14) Different weapons have different characteristics
+   Done by: harmanan
+   Explanation: Snipers have high damage, high bullet speed, but low ammo.
+   Assault rifles have more ammo, high damage, slower bullet speed.
+   etc... (more info in the code)
+
+15) Items on display in inventory
+   Done by: harmanan
+   Explanation: Every time an item is picked up it appears in the inventory.
+
+16) Player can build
+   Done by: harmanan
+   Explanation: A special weapon allows the player to build walls from materials 
+   collected from destroying crates and tombstones.
+
+17) Multiple types of AI
+   Done by: harmanan
+   Explanation: Skeletons have high speed, low damage.
+				Zombies have medium speed, medium damage.
+   				Demons have low speed, high damage.
+
+18) Map shrinks every round
+   Done by: harmanan
+   Explanation: Every round, the map shrinks. Going outside the zone hurts the player.
+
+19) Nuke explosions alter the terrain
+   Done by: harmanan
+   Explanation: Detonating a nuke creates toxic waste that hurts the player.
+
+20) Crates drop loot to be picked up
+   Done by: harmanan
+   Explanation: Destroying a crate drops loot on the map.
+   The probability of each item is computed depending on the round. 
+
+21) Obstacles provide the player with building material
+   Done by: harmanan
+   Explanation: Hitting a crate gives the player wood. Hitting tombstones, rock.
+
+22) Building materials on display
+   Done by: harmanan
+   Explanation: Displays the amount of wood, rock under the player.
+   Active only if the Builder is equipped.

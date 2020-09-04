@@ -1,0 +1,6 @@
+ 1) Node Server: ftd.js 
+	supplies static content + deals with routes for member management, scores etc.
+ 2) Client: model.js+controller.js 
+	handles game logic.
+ 3) Client: rest.js 
+ 	handles the client side of the restful application, ajax requests to server etc.

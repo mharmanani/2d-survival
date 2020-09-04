@@ -1,0 +1,81 @@
+canvas {
+    cursor: url("img/reticle.png"), default;
+}
+
+.main-title {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #a0a;
+    font-size: 55px;
+}
+
+.sub-heading {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #404;
+}
+
+#scoreTable {
+    width:25%;
+    text-align: left;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    border-color: #202;
+    border-width: 12px;
+}
+
+th, td {
+    padding: 15px;
+}
+
+.ftdBtn {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    background-color: #202;
+    color: #a0a;
+    width: 128px;
+    height: 32px;
+}
+
+.deadBtn {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 12px;
+    background-color: #200;
+    color: #a00;
+    width: 128px;
+    height: 32px;
+}
+
+.msg-serv {
+    font-family: Courier;
+    font-size: 14px;
+}
+
+.controls {
+    font-family:sans-serif;
+    color: aliceblue;
+}
+
+/* Style the navbar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+  
+/* Navbar links */
+.navbar a {
+    font-family:sans-serif;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+.game-over {
+    color: #500;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 100px;
+}
+
