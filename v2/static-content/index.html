@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta HTTP-EQUIV="EXPIRES" CONTENT="-1">
+		<title>Fortnite 2D</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/react.js"></script>
+		<script type="text/javascript" src="lib/react-dom.js"></script>
+		<script type="text/javascript" src="lib/babel.min.js"></script>
+		
+		<script language="javascript" src="model.js" > </script>
+		<script language="javascript" src="controller.js" > </script>
+		<script language="javascript" src="ftdClient.js" > </script>
+		
+		<link rel="stylesheet" href="styles.css">
+		<script src="https://unpkg.com/react@latest/umd/react.development.js" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/@material-ui/core/umd/material-ui.development.js" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/babel-standalone@latest/babel.min.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="icon" type="image/png" href="img/zombie.png"/>
+
+		<style>
+		</style>
+	</head>
+
+	<div id="root"> </div>
+    <script type="text/babel"> 
+		const {
+			Button,
+			colors,
+			createMuiTheme,
+			CssBaseline,
+			Dialog,
+			DialogActions,
+			DialogContent,
+			DialogContentText,
+			DialogTitle,
+			Icon,
+			MuiThemeProvider,
+			Typography,
+            withStyles,
+            //CardHeader
+        } = window['material-ui'];
+        const TextField = window['material-ui'].TextField;
+		const MenuItem = window['material-ui'].MenuItem;
+		const Card = window['material-ui'].Card;
+		const CardActions = window['material-ui'].CardActions;
+		const CardContent = window['material-ui'].CardContent;
+
+		class ImageIcon extends React.Component {
+			constructor(props) {
+				super(props);
+			}
+
+			render () {
+
+				const imgStyle = {
+					width: '48px',
+					height: '48px'
+				};
+
+				return (
+					<img style={imgStyle}
+					src={this.props.imgsrc} />
+				);
+			}
+		}
+
+		class Header extends React.Component {
+			constructor(props) {
+				super(props);
+			}
+
+			render () {
+
+				const mainHeadStyle = {
+                    top: '0%',
+                    backgroundColor: '#80cbc4'
+				};
+
+				const mainTitleStyle = {
+					fontFamily: 'Roboto',
+					color: '#004d40',
+					fontSize: '80px'
+				};
+
+				const subTitleStyle = {
+					color: '#b2dfdb',
+					fontSize: '25px'
+				};
+
+				return (
+					<center>
+					<Card style={mainHeadStyle}>
+      				<CardContent>
+                    <div style={mainHeadStyle}>
+                    <Typography variant='h1' style={mainTitleStyle}>fortnite 2D</Typography>
+                    <Typography variant='h3' style={subTitleStyle}>A COOPERATIVE SURVIVAL GAME</Typography>
+                    <span>
+                        <ImageIcon dim={40} imgsrc='img/skeleton.png'/>
+                        <ImageIcon dim={40} imgsrc='img/zombie.png'/>
+                    </span>
+					</div>
+					</CardContent></Card>
+					</center>
+				);
+			}
+
+		}
+
+		class FtdButton extends React.Component {
+			constructor(props) {
+				super(props);
+			}
+
+			render () {
+
+				const btnStyle = {
+					fontFamily: 'Roboto', 
+					fontSize: '12px',
+					backgroundColor: '#004d40',
+					color: '#b2dfdb',
+					width: '128px',
+					height: '32px'
+				};
+
+				return (<Button style={btnStyle} onClick={this.props.clickHandler} value={this.props.value}> {this.props.value} </Button>);
+			}
+
+
+		}
+
+		class LoginForm extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = {
+					usrid: '',
+					passwd: '',
+					tutorial: 0,
+					signedIn: false,
+					_msg: ''
+				};
+
+				this.authenticate = this.authenticate.bind(this);
+
+				this.setUsrID = this.setUsrID.bind(this);
+				this.setPass = this.setPass.bind(this);
+			}
+
+			authenticate () {
+				var msg = '';
+				var that = this;
+				$.ajax({ 
+					method: "GET", 
+					url: "/api/login/",
+					data: {usrid: this.state.usrid, passwd: this.state.passwd}
+				}).done(function(data) {
+					if ("error" in data) {
+						msg = 'Invalid credentials';
+						that.setState({_msg: msg});
+					} else {
+						that.setState({signedIn: true});
+						socket.send(JSON.stringify({
+							sock_id: SOCK_ID,
+							status: 'login', 
+							info: {
+								usrid: that.state.usrid
+							}
+						}));
+					}
+					console.log(that.state);
+				}).fail(function(err){
+					msg = 'An error occurred, please try agin';
+					that.setState({_msg: msg});
+				});
+			}
+
+			setPass (e) {
+				this.setState({passwd: e.target.value});
+			}
+
+			setUsrID (e) {
+				this.setState({usrid: e.target.value});
+			}
+
+			render () {
+
+				if (this.state.signedIn) 
+					return <div></div>;
+
+				const menuStyle = {
+					fontFamily: 'Roboto', 
+					color: '#4db6ac',
+					fontSize: '14px'
+				};
+
+				const headStyle = {
+					fontFamily: 'Roboto', 
+					color: '#004d40',
+				};
+
+				const errStyle = {
+					fontFamily: 'Roboto', 
+					color: '#ff9800',
+					fontSize: '14px', 
+					fontStyle: 'bold',
+				};
+
+				var tutorial = null;
+				if (this.state.tutorial % 2 != 0) tutorial = <Tutorial/>;
+
+				return (
+					<center>
+					<Card>
+						<CardContent>
+						<h3 style={headStyle}> LOGIN </h3>
+						<h5 style={errStyle}> {this.state._msg} </h5>
+						<TextField
+						id="outlined-name"
+						label="Username"
+						value={this.state.usrid}
+						onChange={this.setUsrID} 
+						margin="normal" 
+						/>
+					<br/>
+						<TextField
+						id="outlined-password-input"
+						label="Password"
+						type="password"
+						onChange={this.setPass} 
+						margin="normal"
+						/>
+					<br/>
+					<br/><br/>
+					<FtdButton clickHandler={this.authenticate} value="LOGIN"/>
+					<br/>
+					{tutorial}
+					</CardContent>
+						</Card>
+					</center>
+				);
+			}
+		}
+
+		class RegisterForm extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = {
+					usrid: '',
+					passwd: '',
+					_msg: '',
+					err: false
+				};
+
+				this.createAccount = this.createAccount.bind(this);
+				this.setPass = this.setPass.bind(this);
+				this.setUsrID = this.setUsrID.bind(this);
+			}
+
+			setPass (e) {
+				this.setState({passwd: e.target.value});
+			}
+
+			setUsrID (e) {
+				this.setState({usrid: e.target.value});
+			}
+
+			createAccount() {
+
+				var msg = '';
+				var that = this;
+
+				$.ajax({ 
+					method: "GET", 
+					url: "/api/accounts/",
+					data: {"usrid": this.state.usrid, "passwd": this.state.passwd}
+				}).done(function(data) {
+					if ("error" in data) { 
+						msg = data["error"]; 
+						that.setState({_msg: msg, err: true}); 
+					} else { 
+						msg = 'Account created, return to homepage to sign in';
+						that.setState({_msg: msg});
+					}
+				}).fail(function(err){
+					msg = data["error"];
+					that.setState({_msg: msg, err: true}); 
+				});
+			}
+
+			render () {
+
+				const menuStyle = {
+					fontFamily: 'Roboto', 
+					color: '#4db6ac',
+					fontSize: '14px'
+				};
+
+				const errStyle = {
+					fontFamily: 'Roboto', 
+					color: '#ff9800',
+					fontSize: '14px', 
+					fontStyle: 'bold',
+				};
+
+				const msgStyle = {
+					fontFamily: 'Roboto', 
+					color: '#004d40',
+					fontSize: '14px', 
+					fontStyle: 'bold',
+				};
+
+				const headStyle = {
+					fontFamily: 'Roboto', 
+					color: '#004d40',
+				};
+
+				if (this.state.err) 
+					var msg = <h5 style={errStyle}> {this.state._msg} </h5>;
+				else var msg = <h5 style={msgStyle}> {this.state._msg} </h5>;
+
+				/*return (
+					<center>
+						<h3 id="registerTitle" style={headStyle}> REGISTER </h3>
+						{msg}
+						<span>
+						<h3 style={menuStyle}> Username
+						</h3> <input onChange={this.setUsrID} type="text" id="newUser"/>  
+						</span>
+					<br/>
+					<span>
+						<h3 style={menuStyle}> Password </h3>
+						<input onChange={this.setPass} type="password" required/>  <br/>
+					</span>
+					<br/>
+					<FtdButton clickHandler={this.createAccount} value="CONFIRM"/>
+					<br/>
+					</center>
+				);*/
+
+				return (
+				<center>
+				<Card>
+				<CardContent>
+				<h3 style={headStyle}> REGISTER </h3>
+				<h5 style={errStyle}> {this.state._msg} </h5>
+					<TextField
+					id="outlined-name"
+					label="Username"
+					value={this.state.usrid}
+					onChange={this.setUsrID} 
+					margin="normal" 
+					/>
+				<br/>
+					<TextField
+					id="outlined-password-input"
+					label="Password"
+					type="password"
+					onChange={this.setPass} 
+					margin="normal"
+					/>
+				<br/><br/><br/>
+				<FtdButton clickHandler={this.createAccount} value="CONFIRM"/>
+				<br/>
+				</CardContent>
+				</Card>
+				<br/>
+				</center>
+
+				)
+			}
+
+		}
+
+		class Tutorial extends React.Component {
+			constructor (props) {
+				super(props);
+			}
+
+			render () {
+
+				const menuStyle = {
+					fontFamily: 'Roboto', 
+					color: '#4db6ac',
+					fontSize: '14px'
+				};
+
+				const headStyle = {
+					fontFamily: 'Roboto', 
+					color: '#004d40',
+				};
+
+				if( !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+					navigator.userAgent))) return (
+					<div>
+						<h3 id="controlHead" style={headStyle}> Controls </h3>
+						<ul>
+						<li> <h4 style={menuStyle}> Movement: WASD</h4> </li>
+						<li> <h4 style={menuStyle}> Shoot/Aim/Melee: Mouse</h4> </li>
+						<li> <h4 style={menuStyle}> Switch weapon: X</h4> </li>
+						<li> <h4 style={menuStyle}> Switch to melee: Z</h4> </li>
+						<li> <h4 style={menuStyle}> Pickup item: F</h4> </li>
+						<li> <h4 style={menuStyle}> Drop weapon: V</h4> </li>
+						<li> <h4 style={menuStyle}> Use medkit: H</h4> </li>
+						<li> <h4 style={menuStyle}> Reload: R</h4> </li>
+						<li> <h4 style={menuStyle}> Build: B</h4> </li>
+						<li> <h4 style={menuStyle}> Quit: ]</h4> </li>
+						</ul>
+					</div>
+				);
+
+				else return (
+					<div>
+						<h3 id="controlHead" style={headStyle}> Controls </h3>
+						<h5 id="controlHead" style={headStyle}> Make sure to play in landscape mode with the screen facing you! </h5>
+						<ul>
+						<li> <h4 style={menuStyle}> Movement: Touch/Swipe</h4> </li>
+						<li> <h4 style={menuStyle}> Shoot/Aim/Melee: Touch</h4> </li>
+						<li> <h4 style={menuStyle}> Switch weapon: Flip your device face up</h4> </li>
+						<li> <h4 style={menuStyle}> Pickup item: Touch</h4> </li>
+						<li> <h4 style={menuStyle}> Use medkit: Steer phone to the right</h4> </li>
+						<li> <h4 style={menuStyle}> Reload: Steer phone to the lift</h4> </li>
+						<li> <h4 style={menuStyle}> Build: Flip your phone face down</h4> </li>
+						</ul>
+					</div>
+        		);
+			}
+		}
+
+		class App extends React.Component {
+			constructor (props) {
+				super(props);
+				this.state = {
+					page: 'LOGIN',
+					tutorial: 0,
+					scores: [],
+					scoreStatus: 0
+				}
+
+				this.showTutorial = this.showTutorial.bind(this);
+				this.showRegisterPage = this.showRegisterPage.bind(this);
+				this.update = this.update.bind(this);
+				this.showRanking = this.showRanking.bind(this);
+			}
+
+			showTutorial () {
+				this.setState( () => {
+					var newTut = this.state.tutorial+1;
+					return {tutorial: newTut};
+				});
+			}
+
+			update (e) {
+				console.log(e.currentTarget.value);
+				var next = e.currentTarget.value;
+				if (next == 'HOME') next = 'LOGIN';
+
+				this.setState( (e) => {
+					return {page: next};
+				});
+			}
+
+			showRanking () {
+				var that = this;
+				this.scoreStatus ++ ;
+				if (this.scoreStatus % 2 == 0) {
+					return;
+				}
+
+				$.ajax({ 
+					method: "GET", 
+					url: "/api/scores/"
+				}).done(function(data){        
+					var header = (
+						<tr key={'0'}> 
+						<th> Rank </th> 
+						<th> User </th>
+						<th> Best round </th>
+						<th> Kills</th> 
+						</tr>
+					);
+
+					var rows = [];
+					rows.push(header);
+			
+					for(var i = 0; i < data["scores"].length; i++) {
+						var u = i + 1;
+						rows.push (
+							<tr key={u.toString()}> 
+							<td> {u} </td> 
+							<td> {data["scores"][i].usrid} </td>
+							<td> {data["scores"][i].score} </td>
+							<td> {data["scores"][i].kills} </td>
+							</tr>
+						);
+					}
+			
+					that.setState({scores: rows});
+			
+				}).fail(function(err){
+					alert(data["error"]);
+				});
+			}
+
+			showLoginPage() {
+				var tutorial = null;
+				if (this.state.tutorial % 2 != 0) tutorial = <Tutorial/>;
+
+				if (this.state.scores.length == 0 && tutorial == null) {
+					var scores = <div></div>
+				} else var scores = this.state.scores;
+
+				return (
+					<center>
+						<Header/>
+						<LoginForm/>
+						<br/>
+						<FtdButton clickHandler={this.update} value="REGISTER"/> 
+						<FtdButton clickHandler={this.showTutorial} value="TUTORIAL"/>
+						<FtdButton clickHandler={this.showRanking} value="LEADERBOARDS"/>
+						{tutorial}
+						<br/>
+						{scores}
+					</center>
+				) 
+			}
+
+			showRegisterPage() {
+				console.log("Showing registration form");
+				return (
+					<center>
+					<div>
+						<Header/>
+						<RegisterForm/>
+						<FtdButton clickHandler={this.update} value="HOME"/>
+					</div>
+					</center>
+				)
+			}
+
+			showDeadMessage() {
+				return (
+					<center>
+					<Header/>
+					<br/><br/><br/><br/>
+					<br/><br/><br/><br/>
+					<Typography variant='h1'>
+						You are dead :(
+					</Typography>
+					<br/><br/><br/><br/>
+					<br/><br/><br/><br/>
+					<FtdButton clickHandler={this.update} value="HOME">PLAY AGAIN?</FtdButton>
+					</center>
+				);
+			}
+
+			render() {
+
+				if (this.state.page === 'LOGIN') {
+					return this.showLoginPage();
+				}
+
+				else if (this.state.page === 'REGISTER') {
+					return this.showRegisterPage();
+				}
+
+				if (!alive) {
+					return this.showDeadMessage();
+				}
+			}
+
+		}
+
+		ReactDOM.render(<App />, document.getElementById('root'));
+	</script>
+	
+	<br/><br/>
+    
+	<canvas id='stage'>
+    </canvas>
+    
+</html>
+

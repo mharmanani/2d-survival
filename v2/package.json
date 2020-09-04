@@ -1,0 +1,21 @@
+{
+  "name": "ftd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ftd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "sqlite3": "^4.0.6",
+    "ws": "^6.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.6"
+  }
+}

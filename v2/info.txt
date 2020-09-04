@@ -1,0 +1,17 @@
+========================  
+COMPONENTS
+======================== 
+0) ftd.js (NodeJS+Express+WebSocketServer)
+	Serves static content and implements the REST API via Node+Express
+	Receives socket connections from clients via WebSocketServer.
+
+1) controller.js + ftdClient.js (jQuery+AJAX+WebSocket+JSON)
+	This is the client side of the application.
+	Establishes a WebSocket connection to 142.1.200.140:10361
+	Makes requests to the server and displays the correct aspect of the UI
+	or updates the state of the game/stage.
+
+2) index.html (React.js+Babel+MaterialUI)
+	This is the React application served from the HTML file.
+	Integrated with MaterialUI to display clean/elegant user interface
+	as well as a responsive design.

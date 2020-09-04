@@ -1,0 +1,39 @@
+========================  
+SUGGESTED DEVICES
+======================== 
+- Samsung Galaxy S5+ 
+- Samsung Galaxy Note (the tablet??)
+- anything that runs Android (?)
+- iOS fails to render the canvas properly for some reason
+
+========================  
+MOBILE FEATURES
+======================== 
+0) Swipe/Touch to move
+  Done by: harmanan
+
+1) Touch player to pickup items
+  Done by: harmanan
+
+2) Touch player to shoot weapon
+  Done by: harmanan
+
+3) Steer right to use medkit
+  Explanation: Used the value of the beta angle to implement this feature.
+               Allows the player to steer his phone to the right to use a medkit.
+  Done by: harmanan
+
+4) Steer left to reload weapon
+  Explanation: Used the value of the beta angle to implement this feature.
+               Allows the player to steer his phone to the left to use a medkit.
+  Done by: harmanan
+
+5) Flip phone facedown to equip the Builder
+  Explanation: Used the value of the gamma angle to implement this feature.
+               Allows the player to flip his phone facedown to start building walls.
+  Done by: harmanan
+
+6) Flip phone faceup to switch weapons
+  Explanation: Used the value of the gamma angle to implement this feature.
+               Allows the player to flip his phone facedown to swap weapons.
+  Done by: harmanan
