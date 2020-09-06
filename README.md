@@ -14,4 +14,4 @@ A 2D multiplayer survival game built with JavaScript, Node.js, and React.js
 
   2) **Client-side**: controller.js + ftdClient.js (`jQuery+AJAX+WebSocket+JSON`). This is the client side of the application. It establishes a WebSocket connection to IP:10361, and makes requests to the server to display the correct aspect of the UI or update the state of the game/stage.
 
-  3) **Front-end and UI**: index.html ('React.js + Babel + MaterialUI'). This is the React application served from the HTML file. Integrated with MaterialUI to display clean/elegant user interface as well as a responsive design.
+  3) **Front-end and UI**: index.html (`React.js + Babel + MaterialUI`). This is the React application served from the HTML file. Integrated with MaterialUI to display clean/elegant user interface as well as a responsive design.
